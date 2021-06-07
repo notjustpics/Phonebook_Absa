@@ -1,0 +1,47 @@
+USE [LizPhonebook]
+GO
+
+/****** Object:  Table [dbo].[Entry]    Script Date: 2021/05/20 17:09:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Entry](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PhonebookId] [int] NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[PhoneNumber] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_Entry] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Phonebook]    Script Date: 2021/05/20 17:09:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Phonebook](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
+ CONSTRAINT [PK_Phonebook] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Entry]  WITH CHECK ADD  CONSTRAINT [FK_Entry_Phonebook1] FOREIGN KEY([PhonebookId])
+REFERENCES [dbo].[Phonebook] ([ID])
+GO
+
+ALTER TABLE [dbo].[Entry] CHECK CONSTRAINT [FK_Entry_Phonebook1]
+GO
+
+
